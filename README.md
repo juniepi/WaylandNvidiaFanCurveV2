@@ -1,3 +1,5 @@
+# WARNING DOES NOT WORK FOR THE TIME BEING!  PLEASE USE WHEN YOU SEE THIS MESSAGE GET DELETED THANKS!
+
 # Wayland x Nvidia FanCurveV2
 **``🌡️🔥 /Basic Information/ ❄️🌡️``**
 
