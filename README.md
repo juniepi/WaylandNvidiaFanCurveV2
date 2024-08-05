@@ -1,5 +1,7 @@
 # WARNING DOES NOT WORK FOR THE TIME BEING!  PLEASE USE WHEN YOU SEE THIS MESSAGE GET DELETED THANKS!
 
+Refer to the second known issue in regards to why this "doesnt" work :3 thanks for your time
+
 # Wayland x Nvidia FanCurveV2
 **``🌡️🔥 /Basic Information/ ❄️🌡️``**
 
