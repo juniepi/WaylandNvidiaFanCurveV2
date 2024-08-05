@@ -1,6 +1,9 @@
 # Wayland x Nvidia FanCurveV2
 **``🌡️🔥 /Basic Information/ ❄️🌡️``**
 
+![example](https://github.com/user-attachments/assets/94031e85-792a-40a1-82f0-0b4a73814763)
+
+
 Hi Hi ^^ After making the original Wayland Nvidia FanCurve Project it worked fine but i wanted it to be more aesthetically pleasing! So me and some friends including  [Kyle Ouellette](https://github.com/kyouellette) who does amazing work might i add, Came together and spent a couple hours brainstorming ways to make the code easier to manage and pleasing to look at! 
 
 **⚠️ Warning!**
@@ -16,7 +19,9 @@ Make sure you follow these warnings or it could result in GPU Failure!
 
 **🔻 KNOWN ISSUE**
 
-Sometimes if your temp doesnt go above the threshold of changing temps by one or two degrees it might not change! So the script could be 1 to 2 degrees off! Keep that in mind!
+Sometimes if your temp doesnt go above the threshold of changing temps by one or two degrees it might not change! So the script could be 1 to 2 degrees off! Keep that in mind! NOTE When your temp goes above a certain point in your fan curve for example if your 36C is 47% fan speed and 37 is 50% fan speed if your temp goes from 36 to 37 your script WILL updates, This only happens when the program doesnt have to actively update your temps! 
+
+![knownissue](https://github.com/user-attachments/assets/b268abd2-bb30-4847-94d3-8b20a8b316f6)
 
 
 ## Getting Started
