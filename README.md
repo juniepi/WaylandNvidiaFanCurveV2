@@ -23,6 +23,7 @@ Sometimes if your temp doesnt go above the threshold of changing temps by one or
 
 ![knownissue](https://github.com/user-attachments/assets/b268abd2-bb30-4847-94d3-8b20a8b316f6)
 
+Another Known issue is sometimes when you have this version running for too long it will lock your sudo privileges(?) I assume this is because of a security feature will look more into it! To fix restart your PC!
 
 ## Getting Started
 **``🌱 /Starting Off/Basic info/ 🚀``**
