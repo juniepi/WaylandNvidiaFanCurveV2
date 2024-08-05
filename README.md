@@ -14,6 +14,10 @@ The same warnings still apply as in the original project!
 
 Make sure you follow these warnings or it could result in GPU Failure!
 
+**🔻 KNOWN ISSUE**
+Sometimes if your temp doesnt go above the threshold of changing temps by one or two degrees it might not change! So the script could be 1 to 2 degrees off! Keep that in mind!
+
+
 ## Getting Started
 **``🌱 /Starting Off/Basic info/ 🚀``**
 
