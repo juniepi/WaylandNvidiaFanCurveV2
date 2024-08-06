@@ -1,8 +1,8 @@
 #!/bin/bash
 
 previous_temperature=""
-previous_fan_speed=""
 
+# Function to display information with formatted output
 display_info() {
     local temperature=$1
     local fan_speed=$2
@@ -14,7 +14,8 @@ display_info() {
     echo "╚═══════════════════════════╝"
 }
 
-# This is where you change your ranges for your fan curve!
+# Function to set fan speed based on temperature 
+#THIS PART WAS UPDATED TO FIX SUDO ISSUES PLEASE REFER TO V1 TO CUSTOMIZE THE TEMPS AND FAN SPEEDS
 set_fan_speed() {
     local temperature=$1
     local fan_speed=""
@@ -29,26 +30,22 @@ set_fan_speed() {
         fan_speed=85
     elif ((temperature >= 71 && temperature <= 100)); then
         fan_speed=100
-    fi # Your ranges for temp and fan speed end here!
-
-    # This is where you change you fan labels and gpu label
-    if [[ "$fan_speed" != "$previous_fan_speed" ]]; then
-        sudo -E nvidia-settings -a "[gpu:0]/GPUFanControlState=1" -a "[fan-0]/GPUTargetFanSpeed=$fan_speed" -a "[fan-1]/GPUTargetFanSpeed=$fan_speed"
-        previous_fan_speed=$fan_speed
-        clear  
-        display_info $temperature $fan_speed
     fi
+
+    # Apply fan speed changes (always apply regardless of previous state)
+    sudo -E nvidia-settings -a "[gpu:0]/GPUFanControlState=1" -a "[fan-0]/GPUTargetFanSpeed=$fan_speed" -a "[fan-1]/GPUTargetFanSpeed=$fan_speed"
+    display_info $temperature $fan_speed
 }
 
-
+# Main loop to monitor temperature and adjust fan speed
 while true; do
     temperature=$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader)
 
-    
     if [[ "$temperature" != "$previous_temperature" ]]; then
         set_fan_speed $temperature
         previous_temperature=$temperature
     fi
 
-    sleep 5 #This is the sleep variable you can change, Gaming 4-8 Productivity 10-30
+    sleep 10 # Adjust the sleep duration as needed
 done
+
