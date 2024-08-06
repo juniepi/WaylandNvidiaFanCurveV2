@@ -32,7 +32,7 @@ Another Known issue is sometimes when you have this version running for too long
 ```
 Note that this solution does hold some security issues in some capacity!
 
-**This issue has also seemed to be fixed *hopefully* but we had to end up changing the code to match the V1 script a little bit so please refere to the original WNFC project to setup your fan curves! IF YOU CONTIUNE HAVING PROBLEMS PLEASE RESORT THE VERSION ONE SCRIPT FOUND [HERE](https://github.com/juniepi/WaylandNvidiaFanCurve)**
+**This issue has also seemed to be fixed *hopefully* but we had to end up changing the code to match the V1 script a little bit so please refere to the original WNFC project to setup your fan curves! IF YOU CONTIUNE HAVING PROBLEMS PLEASE RESORT TO THE VERSION ONE SCRIPT FOUND [HERE](https://github.com/juniepi/WaylandNvidiaFanCurve)**
 
 
 ## Getting Started
