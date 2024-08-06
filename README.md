@@ -1,6 +1,3 @@
-# WARNING DOES NOT WORK FOR THE TIME BEING!  PLEASE USE WHEN YOU SEE THIS MESSAGE GET DELETED THANKS!
-
-Refer to the second known issue in regards to why this "doesnt" work :3 thanks for your time
 
 # Wayland x Nvidia FanCurveV2
 **``🌡️🔥 /Basic Information/ ❄️🌡️``**
@@ -33,7 +30,9 @@ Another Known issue is sometimes when you have this version running for too long
 ```
 *your username* ALL=(ALL) NOPASSWD: /usr/bin/nvidia-settings
 ```
-Note that this solution does hold some security issues in some capacity! 
+Note that this solution does hold some security issues in some capacity!
+
+**This issue has also seemed to be fixed *hopefully* but we had to end up changing the code to match the V1 script a little bit so please refere to the original WNFC project to setup your fan curves!**
 
 
 ## Getting Started
