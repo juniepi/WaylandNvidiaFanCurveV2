@@ -29,7 +29,6 @@ set_fan_speed() {
 #
 # Adding and removing fans should be the same process as in the documentation!  sorry if its a bit confusing! There was too much change to add to the documentation! The rest should be straight forward again sorry :c  
 #
-# Main loop to monitor temperature every 30 seconds
 while true; do
     temperature=$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader)
     set_fan_speed $temperature
@@ -41,6 +40,6 @@ while true; do
     echo "  Fan Speed: $fan_speed%            "
     echo "╚═══════════════════════════╝"
 
-    # This is where you change how many seconds it takes for your fan to update 5-15 for gaming, 30-60 for productivity
+    # This is where you change how many seconds it takes for your fan to update 5-15 for gaming, 30-60 for productivity, but make sure you only put one number here!
     sleep 5
 done
