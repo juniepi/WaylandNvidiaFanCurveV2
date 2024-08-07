@@ -20,11 +20,10 @@ Make sure you follow these warnings or it could result in GPU Failure!
 
 **🔻 KNOWN ISSUE**
 
-Sometimes if your temp doesnt go above the threshold of changing temps by one or two degrees it might not change! So the script could be 1 to 2 degrees off! Keep that in mind! NOTE When your temp goes above a certain point in your fan curve for example if your 36C is 47% fan speed and 37 is 50% fan speed if your temp goes from 36 to 37 your script WILL updates, This only happens when the program doesnt have to actively update your temps! 
+(Lastest update 07-08-24)
+i think i have fully fixed this issue but it still might occur im still testing thanks for your patience!
 
-![knownissue](https://github.com/user-attachments/assets/b268abd2-bb30-4847-94d3-8b20a8b316f6)
-
-Another Known issue is sometimes when you have this version running for too long it will lock your sudo privileges(?) I assume this is because of a security feature will look more into it! To fix restart your PC! 
+A Known issue is sometimes when you have this version running for too long it will lock your sudo privileges(?) I assume this is because of a security feature because you're actively asking for sudo privs too much, will look more into it! To fix restart your PC! 
 
 - One possible fix to this problem is adding some permissions to your sudoers file which would look like:
 ```
