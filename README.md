@@ -57,7 +57,7 @@ Now you should be all set for the setup process and install process!
 
 ## Setup & Configuration
 **``🛠️ /Configuration/Setup/ 📚``**
-
+**NOTE A LOT HAS CHANGED PLEASE REFER TO THE ACTUAL SCRIPT FILE FOR BETTER DOCUMENTATION, BUT STILL READ THIS BECAUSE IT STILL GIVES NEEDED STEPS!**
 To get setup we have to actually get the file! you can either download/copy the file directly into your own computer/.sh file or you can get it from this github repo by doing
 ```
 $ git clone https://github.com/juniepi/WaylandNvidiaFanCurveV2
