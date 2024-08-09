@@ -20,30 +20,24 @@ Make sure you follow these warnings or it could result in GPU Failure!
 
 **🔻 KNOWN ISSUE**
 
-(Lastest update 07-08-24)
-i think i have fully fixed this issue but it still might occur im still testing thanks for your patience!
-
-A Known issue is sometimes when you have this version running for too long it will lock your sudo privileges(?) I assume this is because of a security feature because you're actively asking for sudo privs too much, will look more into it! To fix restart your PC! 
-
-- One possible fix to this problem is adding some permissions to your sudoers file which would look like:
+There has been issues in the past regarding this script calling sudo too many times and locking the user from using sudo privileges! This is because of a misconfiguration in the script it's self! Seems as if the fixes I have made to the script has fixed this issue! But if you continue to have the previous mentioned issues please add permission in your sudoers file for your user to be able to access and use nvidia-settings commands without the need for sudo! 
 ```
 *your username* ALL=(ALL) NOPASSWD: /usr/bin/nvidia-settings
 ```
-Note that this solution does hold some security issues in some capacity!
+This will be what you would add to your sudoers file! Thanks for your understanding
 
-**This issue has also seemed to be fixed *hopefully* but we had to end up changing the code to match the V1 script a little bit so please refere to the original WNFC project to setup your fan curves! IF YOU CONTIUNE HAVING PROBLEMS PLEASE RESORT TO THE VERSION ONE SCRIPT FOUND [HERE](https://github.com/juniepi/WaylandNvidiaFanCurve)**
 
 
 ## Getting Started
 **``🌱 /Starting Off/Basic info/ 🚀``**
 
-This Project does require some packages most of which you should are have! You will also need some sort of Nvidia Driver installed! If you do not have a nvidia driver install, Please check out A1RM4X's [Video](https://www.youtube.com/watch?v=QW2XGMAu6VE) on a Script made by [TKG](https://github.com/Frogging-Family/nvidia-all) This should get you fully setup for nvidia! Some other packages you will need are
+This Project does require some packages most of which you should already have! You will also need a Nvidia Driver that works with nvidia-settings installed! If you do not have a nvidia driver installed, Please check out A1RM4X's [Video](https://www.youtube.com/watch?v=QW2XGMAu6VE) on a Script made by [TKG](https://github.com/Frogging-Family/nvidia-all) This should get you fully setup for nvidia! Some other packages you will need include:
 
 - bash
 - nvidia-settings
 - dialog
 
-To install these packages its
+To install these packages use the commands:
 ```
 sudo pacman -S nvida-settings
 ```
@@ -58,10 +52,7 @@ Now you should be all set for the setup process and install process!
 ## Setup & Configuration
 **``🛠️ /Configuration/Setup/ 📚``**
 
-**NOTE A LOT HAS CHANGED PLEASE REFER TO THE ACTUAL SCRIPT FILE FOR BETTER DOCUMENTATION, BUT STILL READ THIS BECAUSE IT STILL GIVES NEEDED STEPS!**
-
-
-To get setup we have to actually get the file! you can either download/copy the file directly into your own computer/.sh file or you can get it from this github repo by doing
+To get setup we have to actually get the file! you can either download/copy the file directly into your own computer or you can get it from this github repo by doing:
 ```
 $ git clone https://github.com/juniepi/WaylandNvidiaFanCurveV2
 ```
@@ -71,57 +62,71 @@ Once you have your nfcv2.sh we have to go into the config and edit it to your li
 
 To configure your file you most open nfcv2.sh into some type of text editor whether that me neovim, vim, nano, or even VsCode!
 
-Once you have opened your nfcv2.sh file into your text editor you may have noticed that the file has changed a lot from the original version ^^ Don't worry its actually way easier to setup than last time!
+Once you have opened your nfcv2.sh file into your text editor, You may have noticed that the file has changed a lot from the original version ^^ Don't worry its actually way easier to setup than last time!
 
 -
 
 Starting out with your fans
 ```
-if ((temperature >= 0 && temperature <= 35)); then
+set_fan_speed() {
+    local temperature=$1
+
+    if ((temperature >= 0 && temperature <= 35)); then
+        sudo -E nvidia-settings -a "[gpu:0]/GPUFanControlState=1" -a "[fan-0]/GPUTargetFanSpeed=47" -a "[fan-1]/GPUTargetFanSpeed=47"
         fan_speed=47
     elif ((temperature >= 36 && temperature <= 50)); then
+        sudo -E nvidia-settings -a "[gpu:0]/GPUFanControlState=1" -a "[fan-0]/GPUTargetFanSpeed=50" -a "[fan-1]/GPUTargetFanSpeed=50"
         fan_speed=50
     elif ((temperature >= 51 && temperature <= 63)); then
+        sudo -E nvidia-settings -a "[gpu:0]/GPUFanControlState=1" -a "[fan-0]/GPUTargetFanSpeed=65" -a "[fan-1]/GPUTargetFanSpeed=65"
         fan_speed=65
     elif ((temperature >= 64 && temperature <= 70)); then
+        sudo -E nvidia-settings -a "[gpu:0]/GPUFanControlState=1" -a "[fan-0]/GPUTargetFanSpeed=85" -a "[fan-1]/GPUTargetFanSpeed=85"
         fan_speed=85
     elif ((temperature >= 71 && temperature <= 100)); then
+        sudo -E nvidia-settings -a "[gpu:0]/GPUFanControlState=1" -a "[fan-0]/GPUTargetFanSpeed=100" -a "[fan-1]/GPUTargetFanSpeed=100"
         fan_speed=100
     fi
+}
 ```
 This is your fan curve! Right now its set to my settings! All you have to do to set it up to your liking is change all the ranges! the ranges being 
 ```
 if ((temperature >= here && temperature <= here)); then
 ```
-Make sure when doing this whatever number you end with,Make sure the next minimum range is one above the previous max range, That might have been confusing so I'll give an example!
+Make sure when doing this whatever number you end with, Make sure the next minimum range is one above the previous max range, That might have been confusing so I'll give an example!
 
 **🗒️ Examples**
 
-So lets use the example 0 and 36, say this is the first curve i have because it has 0!
+So lets use the example 0 and 36, say this is the first curve i have!
 ```
 if ((temperature >= 0 && temperature <= 35)); then
+        sudo -E nvidia-settings -a "[gpu:0]/GPUFanControlState=1" -a "[fan-0]/GPUTargetFanSpeed=47" -a "[fan-1]/GPUTargetFanSpeed=47"
         fan_speed=47
 ```
-and i want to make my  next fancurve so i would have to make the starting temperature +1 of the previous so the next line would look like:
+Now you want to make sure that the max temp which is labeled as "<=", Make sure that your next nodes minimum is one above the previous maximums 
 ```
- elif ((temperature >= 36 && temperature <= 50)); then
+elif ((temperature >= 36 && temperature <= 50)); then
+        sudo -E nvidia-settings -a "[gpu:0]/GPUFanControlState=1" -a "[fan-0]/GPUTargetFanSpeed=50" -a "[fan-1]/GPUTargetFanSpeed=50"
         fan_speed=50
 ```
-Pretty simple once you have a visual explanation right! so if this was togther in the config it would look like this:
+This is what your next node should look like! Pretty simple right! So altogether it should look like this : 
 ```
 if ((temperature >= 0 && temperature <= 35)); then
+        sudo -E nvidia-settings -a "[gpu:0]/GPUFanControlState=1" -a "[fan-0]/GPUTargetFanSpeed=47" -a "[fan-1]/GPUTargetFanSpeed=47"
         fan_speed=47
     elif ((temperature >= 36 && temperature <= 50)); then
+        sudo -E nvidia-settings -a "[gpu:0]/GPUFanControlState=1" -a "[fan-0]/GPUTargetFanSpeed=50" -a "[fan-1]/GPUTargetFanSpeed=50"
         fan_speed=50
 ```
-Boom now you have a properly configured temperature range! But wait what about the fans? Well this is a lot easier than last time! All you have to do to change fan speeds for these temperature ranges is change the fan_speed variable!
+Boom now you have a properly configured temperature range! But wait what about the fans? All you have to do to change fan speeds for these temperature ranges in a node is changing [fan-0] and [fan-1] GPUTargetFanSpeed= , To whatever speed you want in the prevous set range of temperatures, Then finally you want to set fan_speed= to the same speeds you sat [fan-0] and [fan-1]!
 ```
 if ((temperature >= 0 && temperature <= 35)); then
+        sudo -E nvidia-settings -a "[gpu:0]/GPUFanControlState=1" -a "[fan-0]/GPUTargetFanSpeed=47" -a "[fan-1]/GPUTargetFanSpeed=47"
         fan_speed=47
 ```
 So if you wanted to change your fan speeds for this first temperature range you would change:
 ```
-fan_speed=
+"[fan-0]/GPUTargetFanSpeed=47" "[fan-1]/GPUTargetFanSpeed=47" and fan_speed=47
 ```
 to whatever number you want! And then just go down the line of the different ranges! 
 
@@ -129,17 +134,26 @@ to whatever number you want! And then just go down the line of the different ran
 
 Make Sure that you're only changing the variable for temperature ranges and speeds in this section of code!!!
 ```
- if ((temperature >= 0 && temperature <= 35)); then
+set_fan_speed() {
+    local temperature=$1
+
+    if ((temperature >= 0 && temperature <= 35)); then
+        sudo -E nvidia-settings -a "[gpu:0]/GPUFanControlState=1" -a "[fan-0]/GPUTargetFanSpeed=47" -a "[fan-1]/GPUTargetFanSpeed=47"
         fan_speed=47
     elif ((temperature >= 36 && temperature <= 50)); then
+        sudo -E nvidia-settings -a "[gpu:0]/GPUFanControlState=1" -a "[fan-0]/GPUTargetFanSpeed=50" -a "[fan-1]/GPUTargetFanSpeed=50"
         fan_speed=50
     elif ((temperature >= 51 && temperature <= 63)); then
+        sudo -E nvidia-settings -a "[gpu:0]/GPUFanControlState=1" -a "[fan-0]/GPUTargetFanSpeed=65" -a "[fan-1]/GPUTargetFanSpeed=65"
         fan_speed=65
     elif ((temperature >= 64 && temperature <= 70)); then
+        sudo -E nvidia-settings -a "[gpu:0]/GPUFanControlState=1" -a "[fan-0]/GPUTargetFanSpeed=85" -a "[fan-1]/GPUTargetFanSpeed=85"
         fan_speed=85
     elif ((temperature >= 71 && temperature <= 100)); then
+        sudo -E nvidia-settings -a "[gpu:0]/GPUFanControlState=1" -a "[fan-0]/GPUTargetFanSpeed=100" -a "[fan-1]/GPUTargetFanSpeed=100"
         fan_speed=100
     fi
+}
 ```
 changing anything else outside of this section regarding fan_speed and temperature will break the program!!
 
@@ -147,18 +161,18 @@ Another important note to have is there are issues where some GPU's fans dont co
 
 **⏱️ Setting Up Update timer**
 
-This is probably the easiest thing you'll do throughout this entire guide! The update timer basically is just how long until you want your script to scan you GPU's temp and adjust the fans! it should be located as sleep in the script and its found here in the code near the very bottom:
+This is probably the easiest thing you'll do throughout this entire guide! The update timer basically is just how long until you want your script to scan your GPU's temp and adjust the fans! it should be located as sleep in the script and its found here in the code near the very bottom:
 ```
-while true; do
-    temperature=$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader)
+    tput clear
+    
+    
+    echo "╔═══════════════════════════╗"
+    echo "  GPU Temperature: $temperature°C   "
+    echo "  Fan Speed: $fan_speed%            "
+    echo "╚═══════════════════════════╝"
 
-    # Check if temperature has changed
-    if [[ "$temperature" != "$previous_temperature" ]]; then
-        set_fan_speed $temperature
-        previous_temperature=$temperature
-    fi
-
-    sleep 10    #   <-------
+    
+    sleep 15 <-- here
 done
 ```
 For gaming i would recommend setting this to around 5-8, for productivity i would set it anywhere from 10-30! After you change sleep to whatever number you want! you're done with this step!
@@ -170,7 +184,7 @@ Now you should be done configuring your curves that you want and the update time
 ## Preparing Labels 
 **``📄 /Labels/Important info/ 🛑``**
 
-Now we have to make sure your labels match up! this should be a lot simpler than last time as well! first we have to run some commands to see what your system is labeling your GPU and fans on your GPU!
+Now we have to make sure your labels match up! First we have to run some commands to see what your system is labeling your GPU and the fans on your GPU!
 
 **📜 GPU Label**
 
@@ -180,8 +194,9 @@ $ nvidia-smi --query-gpu=index --format=csv
 ```
 This should give you back an index and a number! That number is your GPU's Label in your system! By any chance its not labeled 0, go into the nfcv2.sh and change the 0 in [gpu:0] to whatever number that previous command gave you! gpu:0 should be found here in your code:
 ```
- if [[ "$fan_speed" != "$previous_fan_speed" ]]; then
-        sudo -E nvidia-settings -a "[gpu:0]/GPUFanControlState=1" -a "[fan-0]/GPUTargetFanSpeed=$fan_speed" -a "[fan-1]/GPUTargetFanSpeed=$fan_speed"
+ if ((temperature >= 0 && temperature <= 35)); then
+        sudo -E nvidia-settings -a "[gpu:0]/GPUFanControlState=1" -a "[fan-0]/GPUTargetFanSpeed=47" -a "[fan-1]/GPUTargetFanSpeed=47"
+
 ```
 
 **📜 Fan Labels**
@@ -189,28 +204,53 @@ Now lets move onto fan labels! To check our fan labels we need to run this comma
 ```
 $ nvidia-settings -q fans
 ```
-This command should tell you how many fans that your system environment has labeled! For most people you should see 2 Fans, [fan:0] and [fan:1] This means your good to go! By any chance you have only [fan:0] you need to change this line of code:
+This command should tell you how many fans that your system environment has labeled! For most people you should see 2 Fans, [fan-0] and [fan-1] This means your good to go! By any chance you have only [fan-0] you need to change these lines of code:
 ```
- if [[ "$fan_speed" != "$previous_fan_speed" ]]; then
-        sudo -E nvidia-settings -a "[gpu:0]/GPUFanControlState=1" -a "[fan-0]/GPUTargetFanSpeed=$fan_speed" -a "[fan-1]/GPUTargetFanSpeed=$fan_speed"
+  if ((temperature >= 0 && temperature <= 35)); then
+        sudo -E nvidia-settings -a "[gpu:0]/GPUFanControlState=1" -a "[fan-0]/GPUTargetFanSpeed=47" -a "[fan-1]/GPUTargetFanSpeed=47"
 ```
 And remove [fan-1]! it should look like this after you're done
 ```
- if [[ "$fan_speed" != "$previous_fan_speed" ]]; then
-        sudo -E nvidia-settings -a "[gpu:0]/GPUFanControlState=1" -a "[fan-0]/GPUTargetFanSpeed=$fan_speed"
+ if ((temperature >= 0 && temperature <= 35)); then
+        sudo -E nvidia-settings -a "[gpu:0]/GPUFanControlState=1" -a "[fan-0]/GPUTargetFanSpeed=47"
 ```
 Pretty Simple right! Now if you ran
 ```
 $ nvidia-settings -q fans
 ```
-And you have more than 2 fans, this would be [fan:0] [fan:1] [fan:2] you will have to add [fan:2] to the code it would look something like this:
+And you have more than 2 fans, this would be [fan-0] [fan-1] [fan-2] you will have to add [fan-2] to the code it would look something like this:
 ```
- if [[ "$fan_speed" != "$previous_fan_speed" ]]; then
-        sudo -E nvidia-settings -a "[gpu:0]/GPUFanControlState=1" -a "[fan-0]/GPUTargetFanSpeed=$fan_speed" -a "[fan-1]/GPUTargetFanSpeed=$fan_speed" -a "[fan-2]/GPUTargetFanSpeed=$fan_speed"
+    if ((temperature >= 0 && temperature <= 35)); then
+        sudo -E nvidia-settings -a "[gpu:0]/GPUFanControlState=1" -a "[fan-0]/GPUTargetFanSpeed=47" -a "[fan-1]/GPUTargetFanSpeed=47" -a "[fan-2]/GPUTargetFanSpeed=47"
+        fan_speed=47
 ```
 Again pretty simple right! After doing this we should be on our final step!
 
-**🏁 Final Step** 
+**Please make sure you make these changes to all lines of code that has to do with setting fan curves! This only includes these line of code:**
+
+```
+    if ((temperature >= 0 && temperature <= 35)); then
+        sudo -E nvidia-settings -a "[gpu:0]/GPUFanControlState=1" -a "[fan-0]/GPUTargetFanSpeed=47" -a "[fan-1]/GPUTargetFanSpeed=47"
+        fan_speed=47
+    elif ((temperature >= 36 && temperature <= 50)); then
+        sudo -E nvidia-settings -a "[gpu:0]/GPUFanControlState=1" -a "[fan-0]/GPUTargetFanSpeed=50" -a "[fan-1]/GPUTargetFanSpeed=50"
+        fan_speed=50
+    elif ((temperature >= 51 && temperature <= 63)); then
+        sudo -E nvidia-settings -a "[gpu:0]/GPUFanControlState=1" -a "[fan-0]/GPUTargetFanSpeed=65" -a "[fan-1]/GPUTargetFanSpeed=65"
+        fan_speed=65
+    elif ((temperature >= 64 && temperature <= 70)); then
+        sudo -E nvidia-settings -a "[gpu:0]/GPUFanControlState=1" -a "[fan-0]/GPUTargetFanSpeed=85" -a "[fan-1]/GPUTargetFanSpeed=85"
+        fan_speed=85
+    elif ((temperature >= 71 && temperature <= 100)); then
+        sudo -E nvidia-settings -a "[gpu:0]/GPUFanControlState=1" -a "[fan-0]/GPUTargetFanSpeed=100" -a "[fan-1]/GPUTargetFanSpeed=100"
+        fan_speed=100
+    fi
+```
+**This is very important!**
+
+
+# 🏁 Final Step
+**``🚩 /Permissions/ ✔️``**
 
 now for the fated and final step! we have to give nfcv2.sh execution permissions! first what we need to do is cd into where our nfcv2.sh is located! for example:
 ```
@@ -235,7 +275,7 @@ Now the script should start! You can keep this in the background and it automati
 
 **Stopping Script**
 
-Note that when you stop this script the fans on your GPU will stay set to whatever the script last set them too unless you restart the scrip then they will start adapting again! The only way i know of completely removing the gpu set speed is restarting your pc! 
+Note that when you stop this script the fans on your GPU will stay set to whatever the script last set them too! To continue adapting your fans speeds, restart the script! The only way i know of completely removing the gpu set speed is restarting your pc! 
 
 -
-But you stop the script all you have to do is click in the terminal that its running in and press CTRL + C this will stop the script but take mention of the note above! 
+But to stop the script all you have to do is click in the terminal that the script is running in and press CTRL + C this will stop the script but take mention of the note above! 
