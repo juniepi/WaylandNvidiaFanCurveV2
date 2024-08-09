@@ -62,7 +62,7 @@ Once you have your nfcv2.sh we have to go into the config and edit it to your li
 
 To configure your file you most open nfcv2.sh into some type of text editor whether that me neovim, vim, nano, or even VsCode!
 
-Once you have opened your nfcv2.sh file into your text editor, You may have noticed that the file has changed a lot from the original version ^^ Don't worry its actually way easier to setup than last time!
+Once you have opened your nfcv2.sh file into your text editor, You may have noticed that the file has changed a lot from the original version ^^ please remember some nvidia cards don't properly configure fan speeds below 46% speed! For the most stable experience start your fan curve at 46% speed if you dont want a 0% fan speed block!
 
 -
 
