@@ -22,7 +22,7 @@ Make sure you follow these warnings or it could result in GPU Failure!
 
 There has been issues in the past regarding this script calling sudo too many times and locking the user from using sudo privileges! This is because of a misconfiguration in the script it's self! Seems as if the fixes I have made to the script has fixed this issue! But if you continue to have the previous mentioned issues please add permission in your sudoers file for your user to be able to access and use nvidia-settings commands without the need for sudo!
 
-To access your audoers file the command should be!:
+To access your sudoers file the command should be!:
 ```
 sudo vi
 ```
