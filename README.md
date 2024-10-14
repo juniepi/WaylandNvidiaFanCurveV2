@@ -44,6 +44,9 @@ This Project does require some packages most of which you should already have! Y
 - nvidia-settings
 - dialog
 
+
+**This script ""should"" work on all distro's just translate the packages!! but this has not been tested!** 
+
 To install these packages use the commands:
 ```
 sudo pacman -S nvida-settings
