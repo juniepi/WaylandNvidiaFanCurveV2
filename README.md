@@ -24,7 +24,7 @@ There has been issues in the past regarding this script calling sudo too many ti
 
 To access your sudoers file the command should be!:
 ```
-$ sudo vi
+$ sudo EDITOR=nano visudo
 ```
 
 Then add this line into the appropriate spot in your file! Remember to change the * to your username:
