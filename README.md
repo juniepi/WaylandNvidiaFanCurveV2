@@ -7,7 +7,18 @@
 
 Hi Hi ^^ After making the original Wayland Nvidia FanCurve Project it worked fine but i wanted it to be more aesthetically pleasing! So me and some friends including  [Kyle Ouellette](https://github.com/kyouellette) who does amazing work might i add, Came together and spent a couple hours brainstorming ways to make the code easier to manage and pleasing to look at! 
 
-**⚠️ Warning!**
+
+
+## 📹 Walk Through**
+I recently made a Walk Through video that gives the user a bit of a visual experience to setting up their config!
+But this documentation is a lot more in-depth this is here just in case you get a little bit lost <33!
+ 
+[Walk Through Video <3](https://www.youtube.com/watch?v=QKSVWhnT7c4)
+
+
+
+                       
+## ⚠️ Warning!
 
 The same warnings still apply as in the original project! 
 
